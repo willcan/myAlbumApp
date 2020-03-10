@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import PhotoCard from "./PhotosCard";
+import PhotoCard from "./PhotoCard";
+import AddPhoto from "./AddPhoto";
 
 
 export default function Photos(props) {
@@ -7,6 +8,7 @@ export default function Photos(props) {
         <div>
             Photos
             <PhotoCard/>
+            <AddPhoto/>
          </div>
     )
 }

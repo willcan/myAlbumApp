@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
-import photos from "./Photos";
+import Photos from "./Photos";
 import {
   AppBar,
   Button,
   Drawer,
   IconButton,
   List,
-  ListItem,
-  ListItemText,
   Paper,
   TextField,
   Toolbar,
   Typography
 } from "@material-ui/core";
 import { Link, Route } from "react-router-dom";
+import AddAlbum from "./AddAlbum";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import { auth } from "./firebase";
 
 
@@ -82,12 +84,20 @@ export function App(props) {
           setDrawerOpen(false);
         }}
       >
-        <List>
-          <ListItem button>
-            <ListItemText primary="Home" />
+         <List component="nav">
+          <ListItem button={true}>
+            <ListItemText primary="Nature" />
+          </ListItem>
+          <ListItem button={true}>
+            <ListItemText primary="Cities" />
+          </ListItem>
+          <ListItem button={true}>
+            <ListItemText primary="Create new album" />
           </ListItem>
         </List>
+
       </Drawer>
+      <AddAlbum/>
       <Photos/>
     </div>
   );
