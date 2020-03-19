@@ -9,10 +9,10 @@ import Typography from '@material-ui/core/Typography';
 
 export default function PhotoCard(props) {
     return(
-        <Card className={classes.root}>
+        <Card style={{maxWidth: 345, marginRight: 10, marginTop: 10}}>
       <CardActionArea>
         <CardMedia
-          className={classes.media}
+          style={{height: 140,}}
           image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         />
@@ -26,14 +26,6 @@ export default function PhotoCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
     </Card>
 
     )
