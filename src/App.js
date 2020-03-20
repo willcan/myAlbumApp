@@ -23,6 +23,8 @@ import { auth } from "./firebase";
 export function App(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [dialogue_open, setDialogueOpen] = useState(false);
+  const [albums, setAlbums] = useState([{id: 0, title: 'Nature'}, {id: 1, title: "Cities"}]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -85,20 +87,27 @@ export function App(props) {
         }}
       >
          <List component="nav">
-          <ListItem button={true}>
-            <ListItemText primary="Nature" />
-          </ListItem>
-          <ListItem button={true}>
-            <ListItemText primary="Cities" />
-          </ListItem>
-          <ListItem button={true}>
+           {albums.map((a)=>{
+             return(
+              <ListItem button to={"/app/album/" + a.id + "/"} component={Link} onClick={() => {setDrawerOpen(false)}}>
+              <ListItemText primary={a.title} />
+            </ListItem>
+             )
+             })}
+      
+          <ListItem onClick={()=>{setDialogueOpen(true)}}>
             <ListItemText primary="Create new album" />
           </ListItem>
         </List>
 
       </Drawer>
-      <AddAlbum/>
-      <Photos/>
-    </div>
+      <AddAlbum open={dialogue_open} onClose={()=>{setDialogueOpen(false)}} user={user}/>
+      <Route path="/app/album/:album_id/" render = {() => {
+        return (
+          <Photos/>
+        )
+      }}/>
+  
+      </div>
   );
-}
+  }

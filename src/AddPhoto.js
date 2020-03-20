@@ -8,24 +8,26 @@ import Textfield from '@material-ui/core/Textfield';
 
 
 export default function AddPhoto(props) {
+  const [title, setTitle] = useState("")
+  const handleSavePhoto = () => {
+    console.log("handleSavePhoto")
+  }
     return(
-      <div>
-        <Dialog open={props.open} maxWidth='sm' fullWidth>
+        <Dialog open={props.open} onClose={props.onClose} maxWidth='sm' fullWidth>
 
         <DialogTitle>Add a photo</DialogTitle>
         <DialogContent>
-        <Textfield label="Photo Title" fullwidth/>
+        <Textfield label="Photo Title" fullwidth value={title} onChange = {(e)=>{setTitle(e.target.value)}}/>
         <Button variant='contained' style={{marginTop: 20}}>Choose a file</Button>
         </DialogContent>
         <DialogActions>
-          <Button  color="primary">
+          <Button  color="primary" onClick={props.onClose}>
             Cancel
           </Button>
-          <Button color="primary" variant='contained' onCLick={()=>{}}>
+          <Button color="primary" variant='contained' onClick={handleSavePhoto}>
             Save
           </Button>
         </DialogActions>
       </Dialog>
-      </div>
     )
 }

@@ -5,22 +5,32 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Textfield from '@material-ui/core/Textfield';
+import {db} from "./firebase";
 
 export default function AddAlbum(props) {
+  const [name, setName] = useState("")
+
+  const handleSaveAlbum = () => {
+    db.collection("users").doc(props.user.uid).collection('albums').add({name: name})
+    console.log("handleSaveAlbum")
+  }
     return(
       <div>
         <Dialog
-        open={false}
+        open={props.open}
         maxWidth='sm'
         fullWidth
+        onClose={props.onClose}
       >
-        <DialogTitle>Add album</DialogTitle>
+        <DialogTitle>Add an album</DialogTitle>
         <DialogContent>
-        <Textfield label="Album Name" fullwidth/>
-        <Button variant='contained' style={{marginTop: 20}}>Choose a file</Button>
+        <Textfield label="Album Name" fullWidth value={name} onChange={(e) => {setName(e.target.value)}}/>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" variant='contained'>
+          <Button color="primary" onClick={props.onClose}>
+            Cancel
+          </Button>
+          <Button color="primary" variant='contained' onClick={handleSaveAlbum}>
             Save
           </Button>
         </DialogActions>

@@ -12,17 +12,16 @@ export default function PhotoCard(props) {
         <Card style={{maxWidth: 345, marginRight: 10, marginTop: 10}}>
       <CardActionArea>
         <CardMedia
-          style={{height: 140,}}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          component='img'
+          height="300"
+          image={props.photo.image}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+           {props.photo.title}
           </Typography>
         </CardContent>
       </CardActionArea>
