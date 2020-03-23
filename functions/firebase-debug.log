@@ -1,0 +1,35 @@
+[debug] [2020-03-23T19:54:59.839Z] ----------------------------------------------------------------------
+[debug] [2020-03-23T19:54:59.841Z] Command:       /usr/local/bin/node /usr/local/bin/firebase functions:shell
+[debug] [2020-03-23T19:54:59.841Z] CLI Version:   7.11.0
+[debug] [2020-03-23T19:54:59.841Z] Platform:      darwin
+[debug] [2020-03-23T19:54:59.841Z] Node Version:  v12.14.0
+[debug] [2020-03-23T19:54:59.850Z] Time:          Mon Mar 23 2020 12:54:59 GMT-0700 (Pacific Daylight Time)
+[debug] [2020-03-23T19:54:59.850Z] ----------------------------------------------------------------------
+[debug] [2020-03-23T19:54:59.850Z] 
+[debug] [2020-03-23T19:54:59.863Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-23T19:54:59.863Z] > authorizing via signed-in user
+[debug] [2020-03-23T19:54:59.864Z] [iam] checking project album-66d80 for permissions ["firebase.projects.get"]
+[debug] [2020-03-23T19:54:59.866Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-23T19:54:59.866Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-23T19:55:00.173Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-23T19:55:00.217Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/album-66d80:testIamPermissions  
+
+[debug] [2020-03-23T19:55:00.750Z] <<< HTTP RESPONSE 200
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[info] ✔  functions: Emulator started at http://localhost:5000
+[debug] [2020-03-23T19:55:01.019Z] [functions] Watching "/Users/williamhogan/Desktop/dev/albumApp/myAlbumApp/functions" for Cloud Functions...
+[debug] [2020-03-23T19:55:01.031Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-03-23T19:55:01.032Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-03-23T19:55:01.032Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-03-23T19:55:01.032Z] DEBUG: [worker-~diagnostic~-f4690144-5613-4f03-8c1b-6b38b133a7e5]: Assigning socketPath: /var/folders/ny/b55jgk_51s9dq04wtr3wffcr0000gn/T/fire_emu_8422.sock
+[debug] [2020-03-23T19:55:01.033Z] DEBUG: [worker-~diagnostic~-f4690144-5613-4f03-8c1b-6b38b133a7e5]: BUSY
+[debug] [2020-03-23T19:55:01.257Z] DEBUG: [runtime-status] [8422] Functions runtime initialized. {"cwd":"/Users/williamhogan/Desktop/dev/albumApp/myAlbumApp/functions","node_version":"12.14.0"}
+[debug] [2020-03-23T19:55:01.258Z] DEBUG: [runtime-status] [8422] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-23T19:55:01.260Z] DEBUG: [runtime-status] [8422] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"/Users/williamhogan/Desktop/dev/albumApp/myAlbumApp/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-03-23T19:55:01.262Z] DEBUG: [runtime-status] [8422] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/williamhogan/Desktop/dev/albumApp/myAlbumApp/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-03-23T19:55:01.262Z] DEBUG: [runtime-status] [8422] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/williamhogan/Desktop/dev/albumApp/myAlbumApp/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-03-23T19:55:01.964Z] DEBUG: Unsupported trigger: {"eventTrigger":{"resource":"projects/album-66d80","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"},"name":"authOnCreate","entryPoint":"authOnCreate"}
+[debug] [2020-03-23T19:55:01.964Z] [functions[authOnCreate]] function ignored because the firebaseauth.googleapis.com emulator does not exist or is not running.
+[info] i  functions: Loaded functions: authOnCreate
+[debug] [2020-03-23T19:55:02.000Z] DEBUG: [worker-~diagnostic~-f4690144-5613-4f03-8c1b-6b38b133a7e5]: IDLE

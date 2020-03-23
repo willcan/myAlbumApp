@@ -17,7 +17,7 @@ import AddAlbum from "./AddAlbum";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { auth, db } from "./firebase";
+import { auth, db, snapshotToArray } from "./firebase";
 
 
 export function App(props) {
@@ -40,22 +40,16 @@ export function App(props) {
 
   useEffect(()=>{
       if (user) {
-    db.collection('user')
+    db.collection('users')
     .doc(user.uid)
     .collection('albums')
     .onSnapshot((snapshot)=>{
-      const updated_albums = []
-      snapshot.forEach((s)=>{
-        const data = s.data();
-        data.id = s.id;
-        updated_albums.push(data)
-          console.log(data);
-        setAlbums(updated_albums)
-      });
-
-    })
+      const updated_albums = snapshotToArray(snapshot)
+      setAlbums(updated_albums)
+    });
   }
-  }, [])
+
+  }, [user])
 
   const handleSignOut = () => {
     auth
@@ -108,7 +102,10 @@ export function App(props) {
          <List component="nav">
            {albums.map((a)=>{
              return(
-              <ListItem button to={"/app/album/" + a.id + "/"} component={Link} onClick={() => {setDrawerOpen(false)}}>
+              <ListItem button to={"/app/album/" + a.id + "/"} 
+              component={Link} 
+              onClick={() => {
+                setDrawerOpen(false)}}>
               <ListItemText primary={a.name} />
             </ListItem>
              )
@@ -123,10 +120,15 @@ export function App(props) {
         </List>
 
       </Drawer>
-      <AddAlbum open={dialogue_open} onClose={()=>{setDialogueOpen(false)}} user={user}/>
-      <Route path="/app/album/:album_id/" render = {() => {
+      <AddAlbum open={dialogue_open} 
+                onClose={()=>{
+                  setDialogueOpen(false);
+                  }} 
+                  user={user}/>
+      <Route path="/app/album/:album_id/" 
+             render = {(routeProps) => {
         return (
-          <Photos/>
+          <Photos user={user} {...routeProps}/>
         )
       }}/>
   
