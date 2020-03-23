@@ -17,14 +17,14 @@ import AddAlbum from "./AddAlbum";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 
 
 export function App(props) {
   const [drawer_open, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [dialogue_open, setDialogueOpen] = useState(false);
-  const [albums, setAlbums] = useState([{id: 0, title: 'Nature'}, {id: 1, title: "Cities"}]);
+  const [albums, setAlbums] = useState([{id: 0, name: 'Nature'}, {id: 1, name: "Cities"}]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -37,6 +37,25 @@ export function App(props) {
 
     return unsubscribe;
   }, [props.history]);
+
+  useEffect(()=>{
+      if (user) {
+    db.collection('user')
+    .doc(user.uid)
+    .collection('albums')
+    .onSnapshot((snapshot)=>{
+      const updated_albums = []
+      snapshot.forEach((s)=>{
+        const data = s.data();
+        data.id = s.id;
+        updated_albums.push(data)
+          console.log(data);
+        setAlbums(updated_albums)
+      });
+
+    })
+  }
+  }, [])
 
   const handleSignOut = () => {
     auth
@@ -90,12 +109,15 @@ export function App(props) {
            {albums.map((a)=>{
              return(
               <ListItem button to={"/app/album/" + a.id + "/"} component={Link} onClick={() => {setDrawerOpen(false)}}>
-              <ListItemText primary={a.title} />
+              <ListItemText primary={a.name} />
             </ListItem>
              )
              })}
       
-          <ListItem onClick={()=>{setDialogueOpen(true)}}>
+          <ListItem 
+            button 
+            onClick={()=>{
+              setDialogueOpen(true)}}>
             <ListItemText primary="Create new album" />
           </ListItem>
         </List>
