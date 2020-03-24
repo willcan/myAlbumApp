@@ -9,18 +9,7 @@ import { db, snapshotToArray } from "./firebase";
 export default function Photos(props) {
     
     const [dialogue_open, setDialogueOpen] = useState(false)
-    const [photos, setPhotos] = useState([
-        {id: 0, 
-         title: 'River', 
-         image: "https://images.pexels.com/photos/3857215/pexels-photo-3857215.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"},
-        
-        {id: 1, 
-         title: 'River', 
-         image: "https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"},
-            
-        {id: 2, 
-         title: "Land", 
-         image:"https://images.pexels.com/photos/2406660/pexels-photo-2406660.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"}])
+    const [photos, setPhotos] = useState([])
     
             useEffect(()=>{
                 const unsubscribe = db.collection('users').doc(props.user.uid).collection('albums').doc(props.match.params.album_id).collection('photos').onSnapshot((snapshot)=>{
@@ -34,7 +23,7 @@ export default function Photos(props) {
         <div style={{display: 'flex', flexWrap: 'wrap', paddingLeft: 10, paddingTop: 10 }}>
             {photos.map((p) => {
                 return (
-                    <PhotoCard photo={p}/>
+                    <PhotoCard user={props.user} album_id={props.match.params.albumId} photo={p} editPhoto = {true}/>
                 )
             })}
             <div>
